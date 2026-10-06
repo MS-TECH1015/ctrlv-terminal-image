@@ -8,7 +8,9 @@
 
 No config. One keybinding. Paths work with every CLI that accepts a file path; the Alt+V hand-off on Windows is for Claude Code.
 
-> GIF coming soon.
+![Win+Shift+S, then Ctrl+V in the terminal: Claude Code shows the screenshot as [Image #1] (illustration)](media/demo.gif)
+
+<sub>Illustration of the flow, not a screen recording.</sub>
 
 ## Why
 
