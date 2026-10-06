@@ -3,10 +3,10 @@
 **Ctrl+V just works in the terminal.** Paste a screenshot into Claude Code, Codex CLI, Gemini CLI or any other agent running in the Cursor / VS Code integrated terminal, with the same key you use for text.
 
 - Text in the clipboard → normal paste, zero added latency.
-- Screenshot in the clipboard → saved as PNG, its path is pasted. The agent reads the image.
+- Screenshot in the clipboard → on a local Windows terminal it is handed to Claude Code as Alt+V, so it shows up as `[Image #N]`. Elsewhere it is saved as PNG and its path is pasted for the agent to read.
 - Files copied in Explorer → their paths are pasted.
 
-No config. One keybinding. Works with every CLI that accepts a file path.
+No config. One keybinding. Paths work with every CLI that accepts a file path; the Alt+V hand-off on Windows is for Claude Code.
 
 > GIF coming soon.
 
@@ -19,18 +19,20 @@ Terminals treat Ctrl+V as "paste text". When the clipboard holds an image they p
 From the `.vsix` on the [releases page](https://github.com/MS-TECH1015/ctrlv-terminal-image/releases):
 
 ```sh
-cursor --install-extension ctrlv-terminal-image-0.1.0.vsix
+cursor --install-extension ctrlv-terminal-image-0.1.1.vsix
 # or
-code --install-extension ctrlv-terminal-image-0.1.0.vsix
+code --install-extension ctrlv-terminal-image-0.1.1.vsix
 ```
 
 Then take a screenshot (Win+Shift+S), click into the terminal running your agent, press Ctrl+V.
+
+After installing a new version over an old one, run `Developer: Restart Extension Host` from the command palette. Until then the old code keeps running. Your terminals stay open.
 
 ## Platform status
 
 | Platform | Status |
 |---|---|
-| Windows, local terminal | Tested |
+| Windows, local terminal | Tested in Cursor with Claude Code: Ctrl+V on a screenshot gives `[Image #N]` |
 | Windows → WSL terminal | Paths rewritten to `/mnt/c/...`, untested |
 | macOS | Backend included (`pngpaste`, falls back to `osascript`), untested |
 | Linux | Backend included (`wl-paste`, `xclip`), untested |
