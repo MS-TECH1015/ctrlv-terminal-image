@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 — 2026-10-06
+
+- Windows local terminal: a clipboard image is now handed over as Alt+V, so Claude Code attaches it as `[Image #N]` instead of showing a file path.
+- Pasted paths are framed as a bracketed paste, which Claude Code needs to treat an image path as an attachment.
+
 ## 0.1.0 — 2026-10-06
 
 - First release as Ctrl+V Terminal Image (repo `ctrlv-terminal-image`).

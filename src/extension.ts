@@ -41,8 +41,15 @@ async function paste(context: vscode.ExtensionContext) {
     return textPaste();
   }
 
-  const files = clip.kind === 'image' ? [clip.file] : clip.files;
   const target = await detectTarget(terminal);
+  if (clip.kind === 'image' && process.platform === 'win32' && target === 'local') {
+    // Same bytes as pressing Alt+V: Claude Code reads the clipboard image itself and shows [Image #N].
+    // A pasted path stays plain text there.
+    terminal.sendText('\x1bv', false);
+    return;
+  }
+
+  const files = clip.kind === 'image' ? [clip.file] : clip.files;
   if (target === 'ssh') {
     vscode.window.showWarningMessage('ctrlv: Remote-SSH terminals are not supported yet; the file stays on this machine.');
   }
@@ -56,7 +63,8 @@ async function paste(context: vscode.ExtensionContext) {
     .map((f) => (quote ? `"${f}"` : f))
     .join(' ');
 
-  terminal.sendText(rendered + (trailing ? ' ' : ''), false);
+  // Framed as a bracketed paste: Claude Code turns an image path into [Image #N] only when it arrives as a paste.
+  terminal.sendText(`\x1b[200~${rendered}\x1b[201~` + (trailing ? ' ' : ''), false);
 }
 
 function textPaste() {

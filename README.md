@@ -50,7 +50,7 @@ Issues and PRs for the untested rows are very welcome.
 
 1. `ctrl+v` (`cmd+v` on macOS) is bound to `ctrlv.paste` with `when: terminalFocus`. Outside the terminal nothing changes.
 2. `vscode.env.clipboard.readText()` is checked first. Non-empty text means a plain paste, so normal pasting is never slowed down.
-3. Otherwise a tiny probe runs: on Windows a PowerShell 5.1 script in STA mode reads `Clipboard.GetImage()` / `GetFileDropList()`. The image is saved as PNG and the path is sent to the terminal with `terminal.sendText`.
+3. Otherwise a tiny probe runs: on Windows a PowerShell 5.1 script in STA mode reads `Clipboard.GetImage()` / `GetFileDropList()`. On a local Windows terminal an image is handed over as Alt+V (`ESC v`), so Claude Code reads the clipboard itself and shows `[Image #N]`. Elsewhere the image is saved as PNG and the path is sent as a bracketed paste with `terminal.sendText`.
 
 The extension runs on the UI side (`extensionKind: ui`), so the clipboard it reads is always the one on the machine you are sitting at.
 
