@@ -16,7 +16,7 @@ Terminals treat Ctrl+V as "paste text". When the clipboard holds an image they p
 
 ## Install
 
-From the `.vsix` on the [releases page](https://github.com/minamiseiichiro-tech/ctrlv/releases):
+From the `.vsix` on the [releases page](https://github.com/MS-TECH1015/ctrlv/releases):
 
 ```sh
 cursor --install-extension ctrlv-0.1.0.vsix

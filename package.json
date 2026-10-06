@@ -7,10 +7,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/minamiseiichiro-tech/ctrlv"
+    "url": "https://github.com/MS-TECH1015/ctrlv"
   },
   "bugs": {
-    "url": "https://github.com/minamiseiichiro-tech/ctrlv/issues"
+    "url": "https://github.com/MS-TECH1015/ctrlv/issues"
   },
   "engines": {
     "vscode": "^1.85.0"
