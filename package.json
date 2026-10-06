@@ -1,0 +1,82 @@
+{
+  "name": "ctrlv",
+  "displayName": "ctrlv — paste images into Claude Code / Codex terminals",
+  "description": "Makes Ctrl+V just work in the integrated terminal: text pastes as text, a screenshot pastes as an image path your agent CLI can read.",
+  "version": "0.1.0",
+  "publisher": "minamiseiichiro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minamiseiichiro-tech/ctrlv"
+  },
+  "bugs": {
+    "url": "https://github.com/minamiseiichiro-tech/ctrlv/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "claude code",
+    "codex",
+    "cursor",
+    "terminal",
+    "clipboard",
+    "paste image",
+    "screenshot"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "ctrlv.paste",
+        "title": "ctrlv: Paste clipboard into terminal (image-aware)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ctrlv.paste",
+        "key": "ctrl+v",
+        "mac": "cmd+v",
+        "when": "terminalFocus"
+      }
+    ],
+    "configuration": {
+      "title": "ctrlv",
+      "properties": {
+        "ctrlv.saveDir": {
+          "type": "string",
+          "default": "",
+          "description": "Folder where pasted images are saved. Empty = <temp>/ctrlv."
+        },
+        "ctrlv.quotePaths": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wrap pasted paths in double quotes."
+        },
+        "ctrlv.trailingSpace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Add a space after the pasted path so you can keep typing."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "typescript": "^5.4.0"
+  }
+}
