@@ -1,4 +1,4 @@
-# ctrlv
+# Ctrl+V Terminal Image
 
 **Ctrl+V just works in the terminal.** Paste a screenshot into Claude Code, Codex CLI, Gemini CLI or any other agent running in the Cursor / VS Code integrated terminal, with the same key you use for text.
 
@@ -12,16 +12,16 @@ No config. One keybinding. Works with every CLI that accepts a file path.
 
 ## Why
 
-Terminals treat Ctrl+V as "paste text". When the clipboard holds an image they paste nothing, silently. Claude Code answers this with Alt+V on Windows, iTerm2 needs Cmd+V, VS Code needs a keybindings.json edit, and WSL and Remote-SSH each need their own tool. Sixteen small repos exist for one slice each. ctrlv is one extension for the whole thing: it intercepts Ctrl+V only while the terminal has focus, looks at what is actually in the clipboard, and does the right thing.
+Terminals treat Ctrl+V as "paste text". When the clipboard holds an image they paste nothing, silently. Claude Code answers this with Alt+V on Windows, iTerm2 needs Cmd+V, VS Code needs a keybindings.json edit, and WSL and Remote-SSH each need their own tool. Sixteen small repos exist for one slice each. Ctrl+V Terminal Image is one extension for the whole thing: it intercepts Ctrl+V only while the terminal has focus, looks at what is actually in the clipboard, and does the right thing.
 
 ## Install
 
-From the `.vsix` on the [releases page](https://github.com/MS-TECH1015/ctrlv/releases):
+From the `.vsix` on the [releases page](https://github.com/MS-TECH1015/ctrlv-terminal-image/releases):
 
 ```sh
-cursor --install-extension ctrlv-0.1.0.vsix
+cursor --install-extension ctrlv-terminal-image-0.1.0.vsix
 # or
-code --install-extension ctrlv-0.1.0.vsix
+code --install-extension ctrlv-terminal-image-0.1.0.vsix
 ```
 
 Then take a screenshot (Win+Shift+S), click into the terminal running your agent, press Ctrl+V.
@@ -53,6 +53,10 @@ Issues and PRs for the untested rows are very welcome.
 3. Otherwise a tiny probe runs: on Windows a PowerShell 5.1 script in STA mode reads `Clipboard.GetImage()` / `GetFileDropList()`. The image is saved as PNG and the path is sent to the terminal with `terminal.sendText`.
 
 The extension runs on the UI side (`extensionKind: ui`), so the clipboard it reads is always the one on the machine you are sitting at.
+
+## Name
+
+The repo and extension are `ctrlv-terminal-image`. Commands and settings keep the short `ctrlv.` prefix.
 
 ## Development
 

@@ -1,16 +1,16 @@
 {
-  "name": "ctrlv",
-  "displayName": "ctrlv — paste images into Claude Code / Codex terminals",
+  "name": "ctrlv-terminal-image",
+  "displayName": "Ctrl+V Terminal Image — paste screenshots into Claude Code / Codex",
   "description": "Makes Ctrl+V just work in the integrated terminal: text pastes as text, a screenshot pastes as an image path your agent CLI can read.",
   "version": "0.1.0",
   "publisher": "minamiseiichiro",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MS-TECH1015/ctrlv"
+    "url": "https://github.com/MS-TECH1015/ctrlv-terminal-image"
   },
   "bugs": {
-    "url": "https://github.com/MS-TECH1015/ctrlv/issues"
+    "url": "https://github.com/MS-TECH1015/ctrlv-terminal-image/issues"
   },
   "engines": {
     "vscode": "^1.85.0"
