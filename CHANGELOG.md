@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 — 2026-10-08
+
+- Ignores Ctrl+V while a paste is still in progress. Holding the key used to paste the same screenshot dozens of times.
+
 ## 0.1.2 — 2026-10-08
 
 - Logs to the `ctrlv` output channel: the loaded version and path on activation, and for each paste what was in the clipboard, the detected target and whether Alt+V or a path was sent. This shows when an old version is still running after an upgrade.

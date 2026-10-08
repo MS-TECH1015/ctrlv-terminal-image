@@ -2,7 +2,7 @@
   "name": "ctrlv-terminal-image",
   "displayName": "Ctrl+V Terminal Image — paste screenshots into Claude Code / Codex",
   "description": "Makes Ctrl+V just work in the integrated terminal: text pastes as text, a screenshot pastes as an image path your agent CLI can read.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "minamiseiichiro",
   "license": "MIT",
   "repository": {

@@ -9,6 +9,7 @@ type Clip =
   | { kind: 'files'; files: string[] };
 
 let log: vscode.OutputChannel;
+let busy = false;
 
 export function activate(context: vscode.ExtensionContext) {
   log = vscode.window.createOutputChannel('ctrlv');
@@ -16,7 +17,18 @@ export function activate(context: vscode.ExtensionContext) {
   log.appendLine(`ctrlv ${context.extension.packageJSON.version} activated from ${context.extensionPath}`);
   context.subscriptions.push(
     log,
-    vscode.commands.registerCommand('ctrlv.paste', () => paste(context))
+    vscode.commands.registerCommand('ctrlv.paste', async () => {
+      // Holding Ctrl+V queues a probe per key repeat, and each one would paste the same image again.
+      if (busy) {
+        return;
+      }
+      busy = true;
+      try {
+        await paste(context);
+      } finally {
+        busy = false;
+      }
+    })
   );
 }
 
