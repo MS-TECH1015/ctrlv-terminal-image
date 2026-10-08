@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — 2026-10-08
+
+- Logs to the `ctrlv` output channel: the loaded version and path on activation, and for each paste what was in the clipboard, the detected target and whether Alt+V or a path was sent. This shows when an old version is still running after an upgrade.
+
 ## 0.1.1 — 2026-10-06
 
 - Windows local terminal: a clipboard image is now handed over as Alt+V, so Claude Code attaches it as `[Image #N]` instead of showing a file path.

@@ -8,7 +8,7 @@
 
 No config. One keybinding. Paths work with every CLI that accepts a file path; the Alt+V hand-off on Windows is for Claude Code.
 
-![Win+Shift+S, then Ctrl+V in the terminal: Claude Code shows the screenshot as [Image #1] (illustration)](media/demo.gif)
+![Win+Shift+S, then Ctrl+V in the terminal: Claude Code shows the screenshot as [Image #1] (illustration)](https://raw.githubusercontent.com/MS-TECH1015/ctrlv-terminal-image/main/media/demo.gif)
 
 <sub>Illustration of the flow, not a screen recording.</sub>
 

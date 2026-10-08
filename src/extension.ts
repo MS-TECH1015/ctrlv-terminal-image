@@ -8,8 +8,14 @@ type Clip =
   | { kind: 'image'; file: string }
   | { kind: 'files'; files: string[] };
 
+let log: vscode.OutputChannel;
+
 export function activate(context: vscode.ExtensionContext) {
+  log = vscode.window.createOutputChannel('ctrlv');
+  // The version line tells a stale extension host apart from the installed one.
+  log.appendLine(`ctrlv ${context.extension.packageJSON.version} activated from ${context.extensionPath}`);
   context.subscriptions.push(
+    log,
     vscode.commands.registerCommand('ctrlv.paste', () => paste(context))
   );
 }
@@ -42,10 +48,12 @@ async function paste(context: vscode.ExtensionContext) {
   }
 
   const target = await detectTarget(terminal);
+  log.appendLine(`${new Date().toISOString()} clip=${clip.kind} target=${target} shell=${(terminal.creationOptions as vscode.TerminalOptions).shellPath ?? ''}`);
   if (clip.kind === 'image' && process.platform === 'win32' && target === 'local') {
     // Same bytes as pressing Alt+V: Claude Code reads the clipboard image itself and shows [Image #N].
     // A pasted path stays plain text there.
     terminal.sendText('\x1bv', false);
+    log.appendLine('  sent Alt+V');
     return;
   }
 
@@ -64,6 +72,7 @@ async function paste(context: vscode.ExtensionContext) {
     .join(' ');
 
   // Framed as a bracketed paste: Claude Code turns an image path into [Image #N] only when it arrives as a paste.
+  log.appendLine(`  sent path ${rendered}`);
   terminal.sendText(`\x1b[200~${rendered}\x1b[201~` + (trailing ? ' ' : ''), false);
 }
 
