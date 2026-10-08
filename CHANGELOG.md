@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 — 2026-10-08
+
+- Warns with a Reload Window button when a newer version is installed but the window still runs the old one. Upgrading without a reload used to leave the old behavior in place with no sign of it.
+
 ## 0.1.3 — 2026-10-08
 
 - Ignores Ctrl+V while a paste is still in progress. Holding the key used to paste the same screenshot dozens of times.

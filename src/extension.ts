@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as cp from 'child_process';
+import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 
@@ -34,7 +35,42 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {}
 
+// Installing a new .vsix does not replace the code an open window already loaded, so the old
+// version keeps pasting until the window reloads. Checked on every paste because that is when it matters.
+async function warnIfStale(context: vscode.ExtensionContext) {
+  const current = context.extension.packageJSON.version as string;
+  const dir = path.dirname(context.extensionPath);
+  const prefix = `${context.extension.id.toLowerCase()}-`;
+  const newer = fs.readdirSync(dir)
+    .filter((d) => d.toLowerCase().startsWith(prefix))
+    .map((d) => d.slice(prefix.length))
+    .find((v) => compareVersions(v, current) > 0);
+  if (!newer) {
+    return;
+  }
+  log.appendLine(`  ${newer} is installed but ${current} is still loaded`);
+  const pick = await vscode.window.showWarningMessage(
+    `ctrlv: ${newer} is installed but this window still runs ${current}. Reload to use the new version.`,
+    'Reload Window'
+  );
+  if (pick) {
+    vscode.commands.executeCommand('workbench.action.reloadWindow');
+  }
+}
+
+function compareVersions(a: string, b: string): number {
+  const pa = a.split('.').map(Number);
+  const pb = b.split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    if ((pa[i] || 0) !== (pb[i] || 0)) {
+      return (pa[i] || 0) - (pb[i] || 0);
+    }
+  }
+  return 0;
+}
+
 async function paste(context: vscode.ExtensionContext) {
+  void warnIfStale(context);
   const terminal = vscode.window.activeTerminal;
   if (!terminal) {
     return textPaste();
